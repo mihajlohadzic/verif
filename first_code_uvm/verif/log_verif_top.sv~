@@ -1,0 +1,48 @@
+module log_verif_top;
+	import uvm_pkg::*;
+	`include "uvm_macros.svh"
+	import log_test_pkg::*;
+	
+	logic top_clk;
+	logic top_rst;
+	
+	log_if log_vif(top_clk, top_rst);
+
+	log_top DUT(
+		.top_clk (top_clk),
+		.top_rst (top_rst),
+		.top_matrix_addr_o (log_vif.top_matrix_addr_o),
+		.top_matrix_data_i (log_vif.top_matrix_data_i),
+		.top_matrix_wr_o (log_vif.top_matrix_wr_o),
+		.top_log_addr_o (log_vif.top_log_addr_o),
+		.top_log_data_i (log_vif.top_log_data_i ),
+		.top_log_wr_o (log_vif.top_log_wr_o ),
+		.top_l1_in (log_vif.top_l1_in ),
+		.top_border1_in (log_vif.top_border1_in ),
+		.top_width_in (log_vif.top_width_in ),
+		.top_height_in (log_vif.top_height_in ),
+		.top_im_addr_o (log_vif.top_im_addr_o ),
+		.top_im_data_o (log_vif.top_im_data_o ),
+		.top_im_wr_o (log_vif.top_im_wr_o),
+		.top_im_we_o (log_vif.top_im_we_o ),
+		.top_start (log_vif.top_start ),
+		.top_start2 (log_vif.top_start2 ),
+		.top_ready (log_vif.top_ready)	
+	);
+	
+	  // run test
+   	initial begin
+      		run_test();
+   	end
+
+   // clock and reset init.
+   initial begin
+      top_clk <= 0;
+      top_rst <= 1;
+      #50 top_rst <= 0;
+   end
+
+   // clock generation
+   always #50 top_clk = ~top_clk;
+   
+endmodule : log_verif_top

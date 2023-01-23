@@ -1,0 +1,9 @@
+`ifndef LOG_ENV_SV
+ `define LOG_ENV_SV
+
+class log_env extends uvm_env;
+
+endclass :log_env
+
+
+`endif
