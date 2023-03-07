@@ -198,14 +198,17 @@ ssize_t laplas_read(struct file *pfile, char __user *buffer, size_t length, loff
 	long int len = 0;
 	
 	int val;
-	if (end_read == 1)
-	{
-		end_read = 0;
-		return 0;
-	}
-
-	copy_to_user(buffer, buff, len);
+	int addr;
 	
+	for (int i = 0; i < 256; i ++)
+	{
+		val = ioread32(laplas->base_addr + BRAM3 + i);
+		if (val == 255)
+		{
+			addr =	scnprintf(buff, BUFF_SIZE, "%d\n",BRAM3 + i);
+			copy_to_user(buffer, buff, addr);
+		}
+	}	
 	return 0;
 };
 
