@@ -195,14 +195,13 @@ int j = 0;
 ssize_t laplas_read(struct file *pfile, char __user *buffer, size_t length, loff_t *offset)
 {
 	char buff[BUFF_SIZE];
-	long int len = 0;
 	
 	int val;
 	int addr;
-	
-	for (int i = 0; i < 256; i ++)
+	int i;
+	for (i = 0; i < 256; i ++)
 	{
-		val = ioread32(laplas->base_addr + BRAM3 + i);
+		val = ioread32(laplas -> base_addr + BRAM3 + i);
 		if (val == 255)
 		{
 			addr =	scnprintf(buff, BUFF_SIZE, "%d\n",BRAM3 + i);
