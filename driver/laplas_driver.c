@@ -217,7 +217,6 @@ ssize_t laplas_read(struct file *pfile, char __user *buffer, size_t length, loff
 ssize_t laplas_write(struct file *pfile, const char __user *buffer, size_t length, loff_t *offset) 
 {
 	char buff[BUFF_SIZE];
-	int ret = 0;
 	int val1 = 0;
 	int val2 = 0;
 
