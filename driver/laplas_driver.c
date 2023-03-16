@@ -265,9 +265,10 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     int k = 0;
     int m = 0;
     int cnt = 0;
-    for (int i = 0; i < width; ++i)
+	int i,j;
+    for ( i = 0; i < width; ++i)
     {
-        for (int j = 0; j < height; ++j)
+        for ( j = 0; j < height; ++j)
         {
             picturEv2[i][j] = picture[cnt];
             newinp[i][j] = 0;
@@ -279,9 +280,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     }
     cnt = 0;
 
-    for (int i = 0; i < 5; ++i)
+    for ( i = 0; i < 5; ++i)
     {
-        for (int j = 0; j < 5; ++j)
+        for ( j = 0; j < 5; ++j)
         {
             mask1[i][j] = mask[cnt];
             cnt++;
@@ -290,9 +291,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     }
 
     printk(KERN_INFO "Laplas start ! \n");
-    for (int i=2 ;i< height-2; i++)
+    for ( i=2 ;i< height-2; i++)
     {
-            for (int j=2;j<(width-2);j++)
+            for ( j=2;j<(width-2);j++)
             {
                 spix=0;
                 for (k=0;k<5;k++)
@@ -310,9 +311,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
             }
     }
     printk(KERN_INFO "Find maximum falue !\n");
-    for (int i = 0; i < height; ++i)
+    for (i = 0; i < height; ++i)
     {
-        for (int j = 0; j < width; ++j)
+        for (j = 0; j < width; ++j)
         {
             if (newinp[i][j] > max)
             {
@@ -323,9 +324,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     printk(KERN_INFO "Maximum value is = %d\n", max);
     printk(KERN_INFO "Zero crossing and tresholding!\n");
 
-    for (int i=1;i<(height-1);i++)
+    for ( i=1;i<(height-1);i++)
         {    //j=0;
-            for (int j=1;j<(width-1);j++)
+            for (j=1;j<(width-1);j++)
             {
                 if ( newinp[i][j]!=0)
                 {
@@ -370,9 +371,10 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
                 }
             }
         }
-        for (int i = 0; i < height; ++i)
+		
+        for (i = 0; i < height; ++i)
         {
-            for (int j = 0; j < width; ++j)
+            for (j = 0; j < width; ++j)
             {
                 result[j+i*width] = im[i][j];
                 printk(KERN_INFO "result = %d , position = %d\n", result[j+i*width], j+i*width);            
