@@ -265,15 +265,15 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     printk(KERN_INFO" WE ARE IN HW SIMULATION");
     
     
-    
+    int i,j;
     int k = 0;
     int m = 0;
     int cnt = 0;
     border1 = (l1 / 2);
     border2 = (l2 / 2);
-    for (int i = 0; i < width; ++i)
+    for ( i = 0; i < width; ++i)
     {
-        for (int j = 0; j < height; ++j)
+        for ( j = 0; j < height; ++j)
         {
             picturEv2[i][j] = picture[cnt];
             newinp[i][j] = 0;
@@ -285,9 +285,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     }
     cnt = 0;
 
-    for (int i = 0; i < 5; ++i)
+    for (i = 0; i < 5; ++i)
     {
-        for (int j = 0; j < 5; ++j)
+        for (j = 0; j < 5; ++j)
         {
             mask1[i][j] = mask[cnt];
             cnt++;
@@ -296,9 +296,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     }
 
     printk(KERN_INFO "Laplas start ! \n");
-    for (int i=border1 ;i< height-border1; i++)
+    for (i=border1 ;i< height-border1; i++)
     {
-            for (int j=border1;j<(width-border1);j++)
+            for (j=border1;j<(width-border1);j++)
             {
                 spix=0;
                 for (k=0;k<l1;k++)
@@ -316,9 +316,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
             }
     }
     printk(KERN_INFO "Find maximum falue !\n");
-    for (int i = 0; i < height; ++i)
+    for (i = 0; i < height; ++i)
     {
-        for (int j = 0; j < width; ++j)
+        for (j = 0; j < width; ++j)
         {
             if (newinp[i][j] > max)
             {
@@ -334,9 +334,9 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
     
     printk(KERN_INFO "tresholding is = %d\n", th);
 
-     for (int i = border2;i < (height - border2);i++)
+     for ( i = border2;i < (height - border2);i++)
     {    //j=0;
-        for (int j = border2;j < (width - border2);j++)
+        for (j = border2;j < (width - border2);j++)
         {
             if (newinp[i][j] != 0)
             {
@@ -374,18 +374,18 @@ void laplas_hw(const int width, const int height, const int mask[], const int pi
             }
         }
     }
-        for (int i = 0; i < height; ++i)
+        for ( i = 0; i < height; ++i)
         {
-            for (int j = 0; j < width; ++j)
+            for (j = 0; j < width; ++j)
             {
                 result[j+i*width] = newinp[i][j];
                 printk(KERN_INFO "result = %d , position = %d\n", result[j+i*width], j+i*width);            
             }
         }
 
-        for (int i = 0; i < height; ++i)
+        for (i = 0; i < height; ++i)
         {
-            for (int j = 0; j < width; ++j)
+            for ( j = 0; j < width; ++j)
             {
                 im_result[j+i*width] = im[i][j];
                 if (im_result == 255)
